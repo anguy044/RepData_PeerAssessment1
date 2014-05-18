@@ -47,6 +47,8 @@ plot(steps ~ interval, data = stepInterval, type = "l", col = "steelblue")
 
 
 ## Which 5-min interval on average across all the days in the dataset contains the max number of steps?
+> The interval with maximun number of steps is: 
+
 ```{r}
 max <- which.max(stepInterval$steps)
 stepInterval[max, ]$interval
@@ -97,8 +99,9 @@ hist(x = steps_new$steps, xlab = "Steps", col = "steelblue", main = "Replaced NA
 
 # Are there differences in activity patterns between weekdays and weekends?
 
-## Create a new factor variable in the dataset with two levels - "weekday" and "weekend"
-## indicating whether a given date is a weekday or weekend 
+> Create a new factor variable in the dataset with two levels - "weekday" and "weekend"
+> indicating whether a given date is a weekday or weekend 
+
 ```{r}
 new_data$day <- "weekday"    
 for (i in 1:nrow(new_data)) {
@@ -110,9 +113,10 @@ for (i in 1:nrow(new_data)) {
 ```
 
 
-## Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval 
-## (x-axis) and the average number of steps taken, 
-## averaged across all weekday days or weekend days (y-axis).
+> Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval 
+> (x-axis) and the average number of steps taken, 
+> averaged across all weekday days or weekend days (y-axis).
+
 ```{r, fig.height = 5, fig.width = 10}
 library(lattice)
 steps_final <- aggregate(steps ~ interval + day, FUN = "mean", data = new_data)
@@ -120,4 +124,10 @@ xyplot(steps ~ interval | day, data = steps_final, type = "l", layout = c(1, 2),
   
 ```
 
+
+## Analysis
+> From what we can see, the subject(s) seems to walk more during the weekends
+> compared to the weekdays on average. This is most likely the case
+> as most people work during the weekdays and have less time to walk as 
+> compared to weekends. 
 
